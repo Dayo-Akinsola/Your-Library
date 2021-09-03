@@ -7,12 +7,33 @@
     <script type="module" src="book.js" defer></script>
     <body>
         <div class="header">
-            <div>
+            <div class="heading-container">
                 <h1 class="heading">Your Library</h1>
             </div>
-            <div>
-                
+            <div class="symbol-border">
+                <span class="add-symbol">&#43;</span>
             </div>
+        </div>
+
+        <div class="form-container">
+            <form class="book-form">
+                <label for="title"><b>Title:</b></label>
+                <input type="text" placeholder="Enter Book Title" name="title" required />
+
+                <label for="author"><b>Autor:</b></label>
+                <input type="text" placeholder="Enter Book Author" name="author" required />
+
+                <label for="pages"><b>Pages:</b></label>
+                <input type="number" placeholder="Enter Number of pages" name="pages" required />
+
+                <label for="read"><b>Have You Read the Book?</b></label>
+                <select name="read" required>
+                    <option value="read">Read</option>
+                    <option value="not-read">Not Read</option>
+                </select>
+                <button type="submit" class="add-new-book">Add New Book</button>
+                <button type="button" class="cancel">Return</button>
+            </form>
         </div>
     </body>
 </html>
