@@ -17,23 +17,25 @@
 
         <div class="form-container">
             <form class="book-form">
-                <label for="title"><b>Title:</b></label>
-                <input type="text" placeholder="Enter Book Title" name="title" required />
+                <h2>New Book</h2>
+                <input type="text" placeholder="Title" name="title" required />
 
-                <label for="author"><b>Autor:</b></label>
-                <input type="text" placeholder="Enter Book Author" name="author" required />
+                <input type="text" placeholder="Author" name="author" required />
 
-                <label for="pages"><b>Pages:</b></label>
-                <input type="number" placeholder="Enter Number of pages" name="pages" required />
+                <input type="number" min="0" placeholder="Pages" name="pages" required />
 
                 <label for="read"><b>Have You Read the Book?</b></label>
                 <select name="read" required>
                     <option value="read">Read</option>
                     <option value="not-read">Not Read</option>
                 </select>
-                <button type="submit" class="add-new-book">Add New Book</button>
-                <button type="button" class="cancel">Return</button>
+
+                <div class="btns">
+                    <button type="submit" class="add-new-book">Add New Book</button>
+                    <button type="button" class="cancel">Return</button>
+                </div>
             </form>
         </div>
+        <div class="books-display"></div>
     </body>
 </html>
