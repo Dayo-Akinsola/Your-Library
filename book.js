@@ -10,10 +10,14 @@ function Book(title, author, pages, read){
     }
 }
 
-const book1 = new Book('Algorithms in C', 'Robert Sedgewick', 964, 'Not read');
-const book2 = new Book('Of Mice And Men', 'John Steinbeck', 107, 'Read');
-const book3 = new Book('Pride And Prejudice', 'Jane Austen', 408, 'Read');
-const book4 = new Book('The Great Gatsby', 'F. Scott Fitzgerald', 180, 'Read');
+Book.prototype.toggleRead = function(){
+    this.read = !this.read;
+}
+
+const book1 = new Book('Algorithms in C', 'Robert Sedgewick', 964, false);
+const book2 = new Book('Of Mice And Men', 'John Steinbeck', 107, true);
+const book3 = new Book('Pride And Prejudice', 'Jane Austen', 408, true);
+const book4 = new Book('The Great Gatsby', 'F. Scott Fitzgerald', 180, true);
 
 myLibrary.push(book1);
 myLibrary.push(book2);
@@ -39,7 +43,6 @@ const displayBooks = () => {
     const booksDisplay = document.querySelector('.books-display');
     booksDisplay.textContent = '';
     let key = 0;
-    console.log(myLibrary); 
     myLibrary.forEach(book => {
         const bookDiv = document.createElement('div');
         const bookHead = document.createElement('div');
@@ -71,7 +74,7 @@ const displayBooks = () => {
                     span.classList.add('info');
                     break;
                 case 2:
-                    span.textContent = book.read;
+                    book.read === true ? span.textContent = 'Read' : span.textContent = "Not Read";
                     span.classList.add('info');
                     break;
             }
@@ -90,8 +93,8 @@ const addBook = () => {
     const select = document.querySelector('select');
     const addNewBook = document.querySelector('.add-new-book');
     const formContainer = document.querySelector('.form-container-modal');
-    const newBook = new Book();
     addNewBook.addEventListener('click', () => {
+        const newBook = new Book();
         inputs.forEach(input => {
             switch(input.name){
                 case 'title':
@@ -104,9 +107,11 @@ const addBook = () => {
                     newBook.pages = input.value;
             }
         })
-        newBook.read = select.value;
+        select.value === 'true' ? newBook.read = true : newBook.read = false;
         myLibrary.push(newBook);
         formContainer.style.display = 'none';
+        displayBooks();
+
     })
 }
 
