@@ -10,7 +10,7 @@ function Book(title, author, pages, read){
     }
 }
 
-Book.prototype.toggleRead = function(){
+Book.prototype.readChange = function(){
     this.read = !this.read;
 }
 
@@ -62,30 +62,43 @@ const displayBooks = () => {
         bookDiv.appendChild(bookHead);
 
         for (let i = 0 ; i <= 2; i++){
-            const span = document.createElement('span');
+            let span;
 
             switch(i){
                 case 0:
+                    span = document.createElement('span');
                     span.textContent = `Author: ${book.author}`;
                     span.classList.add('info');
+                    bookDiv.appendChild(span);
                     break;
                 case 1:
+                    span = document.createElement('span');
                     span.textContent = `Number of Pages: ${book.pages}`;
                     span.classList.add('info');
+                    bookDiv.appendChild(span);
                     break;
                 case 2:
-                    book.read === true ? span.textContent = 'Read' : span.textContent = "Not Read";
-                    span.classList.add('info');
+                    const readButton = document.createElement('button');
+                    if (book.read === true){
+                        readButton.textContent ='Read';
+                        readButton.style.backgroundColor = 'green';
+                    }
+                    else{
+                        readButton.textContent = 'Not Read';
+                        readButton.style.backgroundColor = 'dodgerblue';
+                    }
+                    readButton.classList.add('read-button');
+                    bookDiv.appendChild(readButton);
                     break;
             }
 
-            bookDiv.appendChild(span);
         }
         
         booksDisplay.appendChild(bookDiv);
         key++;
     })
     deleteBook();
+    toggleRead();
 }
 
 const addBook = () => {
@@ -130,8 +143,27 @@ const deleteBook = () => {
     })
 }
 
+const toggleRead = () => {
+    const readButtons = document.querySelectorAll('.read-button');
+    const books = document.querySelectorAll('.book-div');
+    readButtons.forEach(button => {
+        button.addEventListener('click', () =>{
+            console.log(button.parentNode.dataset.key);
+            books.forEach(book => {
+                console.log(book.dataset.key);
+                if (button.parentNode.dataset.key === book.dataset.key){
+                    myLibrary[book.dataset.key].readChange();
+                    console.log(myLibrary);
+                }
+                displayBooks();
+            })
+        })
+    })
+}
+
 showBookForm();
 addBook();
 displayBooks();
+toggleRead();
 
 
