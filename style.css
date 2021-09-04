@@ -136,7 +136,7 @@ select{
     border-width: 2px;
     height: 130.23px;
     justify-content: flex-start;
-
+    border-radius: 20px;
 }
 
 .delete-symbol{
