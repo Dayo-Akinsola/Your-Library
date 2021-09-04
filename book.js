@@ -6,7 +6,7 @@ function Book(title, author, pages, read){
     this.pages = pages;
     this.read = read;
     this.info = () => {
-        return `${title} by ${author}, ${pages} pages, ${read}`
+        return `${title} by ${author}, ${pages} pages, ${read}`;
     }
 }
 
@@ -38,27 +38,41 @@ const showBookForm = () => {
 const displayBooks = () => {
     const booksDisplay = document.querySelector('.books-display');
     booksDisplay.textContent = '';
+    let key = 0;
+    console.log(myLibrary); 
     myLibrary.forEach(book => {
         const bookDiv = document.createElement('div');
-        bookDiv.classList.add('book-div');
+        const bookHead = document.createElement('div');
         const title = document.createElement('h3');
+        const deleteSymbol = document.createElement('span');
+
+        bookDiv.classList.add('book-div');
+        bookDiv.dataset.key = `${key}`;
         title.classList.add('title');
+        deleteSymbol.classList.add('delete-symbol');
+        bookHead.classList.add('book-heading');
+
+        deleteSymbol.innerHTML = '&#8339;'
         title.textContent = book.title;
-        bookDiv.appendChild(title);
+        bookHead.appendChild(deleteSymbol);
+        bookHead.appendChild(title);
+        bookDiv.appendChild(bookHead);
 
         for (let i = 0 ; i <= 2; i++){
             const span = document.createElement('span');
-            span.classList.add('info');
 
             switch(i){
                 case 0:
                     span.textContent = `Author: ${book.author}`;
+                    span.classList.add('info');
                     break;
                 case 1:
                     span.textContent = `Number of Pages: ${book.pages}`;
+                    span.classList.add('info');
                     break;
                 case 2:
                     span.textContent = book.read;
+                    span.classList.add('info');
                     break;
             }
 
@@ -66,15 +80,18 @@ const displayBooks = () => {
         }
         
         booksDisplay.appendChild(bookDiv);
+        key++;
     })
+    deleteBook();
 }
 
 const addBook = () => {
     const inputs = document.querySelectorAll('input');
     const select = document.querySelector('select');
     const addNewBook = document.querySelector('.add-new-book');
+    const formContainer = document.querySelector('.form-container-modal');
     const newBook = new Book();
-    addNewBook.addEventListener('click', (event) => {
+    addNewBook.addEventListener('click', () => {
         inputs.forEach(input => {
             switch(input.name){
                 case 'title':
@@ -89,10 +106,27 @@ const addBook = () => {
         })
         newBook.read = select.value;
         myLibrary.push(newBook);
-        displayBooks();
+        formContainer.style.display = 'none';
+    })
+}
+
+const deleteBook = () => {
+    const deleteButtons = document.querySelectorAll('.delete-symbol');
+    const books = document.querySelectorAll('.book-div');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            books.forEach(book => {
+                if (button.parentNode.parentNode.dataset.key === book.dataset.key){
+                    myLibrary.splice(book.dataset.key, 1);
+                }
+                displayBooks();
+            })
+        })
     })
 }
 
 showBookForm();
 addBook();
 displayBooks();
+
+
