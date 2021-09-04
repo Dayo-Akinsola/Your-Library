@@ -120,8 +120,8 @@ select{
 .books-display{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 60px;
-    row-gap: 6rem;
+    grid-template-rows: auto;
+    row-gap: 2rem;
     width: 60%;
     margin: auto;
     margin-top: 40px;
@@ -135,12 +135,34 @@ select{
     border-style: solid;
     border-width: 2px;
     height: 130.23px;
+    justify-content: flex-start;
 
 }
 
-span{
-    padding: 2px 0 2px 0;
+.delete-symbol{
+    position: static;
+    font-weight: 500;
+    bottom: 5px;
+    font-size: 30px;
+    margin-left: 240px;
+    line-height: 0.8;
 }
+
+.delete-symbol:hover{
+    cursor: pointer;
+    color: crimson;
+}
+
+.book-heading{
+    display: inline-block;
+}
+
+.title{
+    text-align: center;
+    margin-top: auto;
+}
+
+
 
 
 
