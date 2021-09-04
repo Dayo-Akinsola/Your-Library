@@ -15,23 +15,23 @@
             </div>
         </div>
 
-        <div class="form-container">
+        <div class="form-container-modal">
             <form class="book-form">
                 <h2>New Book</h2>
-                <input type="text" placeholder="Title" name="title" required />
+                <input type="text" placeholder="Title" name="title" value=""  required />
 
-                <input type="text" placeholder="Author" name="author" required />
+                <input type="text" placeholder="Author" name="author" value="" required />
 
-                <input type="number" min="0" placeholder="Pages" name="pages" required />
+                <input type="number" min="0" placeholder="Pages" name="pages" value="" required />
 
                 <label for="read"><b>Have You Read the Book?</b></label>
                 <select name="read" required>
-                    <option value="read">Read</option>
-                    <option value="not-read">Not Read</option>
+                    <option value="Read">Read</option>
+                    <option value="Not Read">Not Read</option>
                 </select>
 
                 <div class="btns">
-                    <button type="submit" class="add-new-book">Add New Book</button>
+                    <button type="button" class="add-new-book">Add New Book</button>
                     <button type="button" class="cancel">Return</button>
                 </div>
             </form>
