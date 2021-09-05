@@ -3,10 +3,19 @@ body{
     margin: 0px;
 }
 
+p{
+    color: red;
+}
+
 input{
     height: 30px;
     font-size: large;
     margin: 10px 0 10px 0;
+    border-color: rgb(207, 217, 222);
+}
+
+input:active{
+    border-color: green;
 }
 
 .btns{
@@ -174,6 +183,7 @@ select{
 .read-button:hover{
     cursor: pointer;
 }
+
 
 
 
