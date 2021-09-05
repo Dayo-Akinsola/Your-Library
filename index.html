@@ -11,21 +11,26 @@
                 <h1 class="heading">Your Library</h1>
             </div>
             <div class="symbol-border">
-                <span class="add-symbol">&#43;</span>
+                <span class="add-symbol">&#43; Add Book</span>
+            </div>
+            <div class="book-stats">
+                <p>Total Books: </p>
+                <p>Books Read: </p>
+                <p>Book Unread: </p>
             </div>
         </div>
 
         <div class="form-container-modal">
             <form class="book-form">
                 <h2>New Book</h2>
-                <input type="text" placeholder="Title" name="title" value=""  required/>
-                <p></p>
+                <input class="book-info" type="text" placeholder="Title" name="title" value=""  required/>
+                <p class="warning"></p>
 
-                <input type="text" placeholder="Author" name="author" value="" required/>
-                <p></p>
+                <input class="book-info" type="text" placeholder="Author" name="author" value="" required/>
+                <p class="warning"></p>
                 
-                <input type="number" min="0" placeholder="Pages" name="pages" value="" required/>
-                <p></p>
+                <input class="book-info" type="number" min="0" placeholder="Pages" name="pages" value="" required/>
+                <p class="warning"></p>
                 <label for="read"><b>Have You Read the Book?</b></label>
                 <select name="read" required>
                     <option value="true">Read</option>
