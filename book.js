@@ -112,6 +112,7 @@ const addBook = () => {
             switch(input.name){
                 case 'title':
                     newBook.title = input.value;
+                    console.log(input.value);
                     break;
                 case 'author':
                     newBook.author = input.value;
@@ -120,10 +121,23 @@ const addBook = () => {
                     newBook.pages = input.value;
             }
         })
-        select.value === 'true' ? newBook.read = true : newBook.read = false;
-        myLibrary.push(newBook);
-        formContainer.style.display = 'none';
-        displayBooks();
+        let formComplete = true;
+
+        inputs.forEach(input => {
+            if (!input.value){
+                const warning = input.nextElementSibling;
+                warning.textContent = `${input.placeholder} must be filled.`
+                formComplete = false;
+            }
+        })
+
+        if (formComplete){
+            select.value === 'true' ? newBook.read = true : newBook.read = false;
+            myLibrary.push(newBook);
+            inputs.forEach(input => input.value = "");
+            formContainer.style.display = 'none';
+            displayBooks();
+        }
 
     })
 }
