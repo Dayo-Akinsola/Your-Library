@@ -24,11 +24,31 @@ myLibrary.push(book2);
 myLibrary.push(book3);
 myLibrary.push(book4);
 
+const bookCount = (myLibrary) => {
+    let count = 0;
+    myLibrary.forEach(book => count++);
+    return count;
+}
+
+const readCount = (myLibrary) => {
+    let count = 0;
+    myLibrary.forEach(book => { if(book.read) count++; });
+    return count;
+}
+
+const unreadCount = (myLibrary) => {
+    let count = 0
+    myLibrary.forEach(book => { if(!book.read) count++; });
+    return count;
+}
+
+
 
 const showBookForm = () => {
     const symbol = document.querySelector('.add-symbol');
     const formContainer = document.querySelector('.form-container-modal');
     const cancel = document.querySelector('.cancel');
+    const inputs = document.querySelectorAll('.book-info');
 
     symbol.addEventListener('click', () => {
         formContainer.style.display = 'block';
@@ -36,12 +56,18 @@ const showBookForm = () => {
 
     cancel.addEventListener('click', () => {
         formContainer.style.display = 'none';
+        inputs.forEach(input => {
+            input.style.borderColor = 'rgb(207, 217, 222);';
+            input.nextElementSibling = '';
+        }
+    )
     })
 }
 
 const displayBooks = () => {
     const booksDisplay = document.querySelector('.books-display');
     booksDisplay.textContent = '';
+    const stats = document.querySelector('.book-stats').children;
     let key = 0;
     myLibrary.forEach(book => {
         const bookDiv = document.createElement('div');
@@ -97,12 +123,15 @@ const displayBooks = () => {
         booksDisplay.appendChild(bookDiv);
         key++;
     })
+    stats[0].textContent = `Total Books: ${bookCount(myLibrary)}`;
+    stats[1].textContent = `Read Books: ${readCount(myLibrary)}`;
+    stats[2].textContent = `Unread Books ${unreadCount(myLibrary)}`;
     deleteBook();
     toggleRead();
 }
 
 const addBook = () => {
-    const inputs = document.querySelectorAll('input');
+    const inputs = document.querySelectorAll('.book-info');
     const select = document.querySelector('select');
     const addNewBook = document.querySelector('.add-new-book');
     const formContainer = document.querySelector('.form-container-modal');
@@ -112,7 +141,6 @@ const addBook = () => {
             switch(input.name){
                 case 'title':
                     newBook.title = input.value;
-                    console.log(input.value);
                     break;
                 case 'author':
                     newBook.author = input.value;
@@ -124,10 +152,16 @@ const addBook = () => {
         let formComplete = true;
 
         inputs.forEach(input => {
+            const warning = input.nextElementSibling;
             if (!input.value){
-                const warning = input.nextElementSibling;
                 warning.textContent = `${input.placeholder} must be filled.`
+                input.style.borderColor = '#bb1411';
                 formComplete = false;
+            }
+
+            else{
+                warning.textContent = '';
+                input.style.borderColor = 'rgb(207, 217, 222)';
             }
         })
 
@@ -162,12 +196,9 @@ const toggleRead = () => {
     const books = document.querySelectorAll('.book-div');
     readButtons.forEach(button => {
         button.addEventListener('click', () =>{
-            console.log(button.parentNode.dataset.key);
             books.forEach(book => {
-                console.log(book.dataset.key);
                 if (button.parentNode.dataset.key === book.dataset.key){
                     myLibrary[book.dataset.key].readChange();
-                    console.log(myLibrary);
                 }
                 displayBooks();
             })
