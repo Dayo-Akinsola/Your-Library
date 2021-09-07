@@ -42,26 +42,29 @@ input:active{
 .add-symbol{
     font-weight: 200;
     font-size: 20px;
-    color: white;
+    color: black;
+    margin-left: 720px;
 }
 
 .add-symbol:hover{
     cursor: pointer;
-    background-color: #4d4b4b;
+    font-size: 22px;
 }
 
 .symbol-border{
-    background-color: black;
-    margin-left: 160px;
+    background-color: #f2efef;
+    margin: auto;
+    /* margin-left: 160px; */
 }
 
 .heading{
-    color: white;
+    color: black;
     margin: auto;
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
     font-size: 40px;
+    font-family: 'Pacifico', cursive;
 }
 
 .heading-container{
@@ -74,11 +77,10 @@ input:active{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    background-color: black;
     text-align: center;
     width: 100%;
     align-items: center;
-
+    background: linear-gradient(236deg, rgb(250 199 150) 0%, rgb(133 228 255) 100%);
 }
 
 .book-form{
@@ -166,11 +168,12 @@ select{
 }
 
 .book-stats{
-    color: white;
-    font-size: 14px;
+    color: black;
+    font-size: 16px;
     margin-top: 0px;
     text-align: left;
     margin-left: 8px;
+    font-weight: 600;
 }
 
 .delete-symbol{
