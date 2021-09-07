@@ -18,6 +18,12 @@ body{
     border-color: rgb(207, 217, 222);
 }
 
+.info{
+    font-size: 14px;
+    bottom: 14px;
+    position: relative;
+}
+
 input:active{
     border-color: green;
 }
@@ -149,11 +155,14 @@ select{
     display: flex;
     flex-direction: column;
     text-align: center;
-    border-style: solid;
-    height: 130.23px;
-    justify-content: flex-start;
-    padding-bottom: 18px;
-    border-radius: 8px 8px 0 0;
+    border-style: outset;
+    height: 140px;
+    justify-content: flex-end;
+    border-radius: 8px 8px 0px 0px;
+    bottom: 0px;
+    top: 0px;
+    overflow: hidden;
+    align-items: stretch;
 }
 
 .book-stats{
@@ -165,12 +174,12 @@ select{
 }
 
 .delete-symbol{
-    position: static;
+    position: relative;
     font-weight: 500;
     bottom: 5px;
     font-size: 30px;
-    margin-left: 240px;
-    line-height: 0.8;
+    left: 125px;
+    line-height: 0.6;
 }
 
 .delete-symbol:hover{
@@ -179,20 +188,22 @@ select{
 }
 
 .book-heading{
-    display: inline-block;
+    display: contents;
+
 }
 
 .title{
     text-align: center;
     margin-top: auto;
+    font-size: 1em;
 }
 
 .read-button{
     position: relative;
-    top: 5px;
     width: 100%;
     padding: 5px 0px 10px 0px;
     font-size: large;
+    border: none;
     background-color: green;
     font-weight: 700;
 }
