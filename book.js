@@ -124,11 +124,11 @@ const displayBooks = () => {
                     const readButton = document.createElement('button');
                     if (book.read === true){
                         readButton.textContent ='Read';
-                        readButton.style.backgroundColor = 'green';
+                        readButton.style.backgroundColor = '#85E4FF';
                     }
                     else{
                         readButton.textContent = 'Not Read';
-                        readButton.style.backgroundColor = 'dodgerblue';
+                        readButton.style.backgroundColor = '#FAC796';
                     }
                     readButton.classList.add('read-button');
                     bookDiv.appendChild(readButton);
@@ -140,7 +140,6 @@ const displayBooks = () => {
         booksDisplay.appendChild(bookDiv);
         key++;
     })
-    console.log(myLibrary);
     stats[0].textContent = `Total Books: ${bookCount(myLibrary)}`;
     stats[1].textContent = `Read Books: ${readCount(myLibrary)}`;
     stats[2].textContent = `Unread Books ${unreadCount(myLibrary)}`;    
@@ -226,6 +225,5 @@ const toggleRead = () => {
 showBookForm();
 addBook();
 displayBooks();
-toggleRead();
 
 
