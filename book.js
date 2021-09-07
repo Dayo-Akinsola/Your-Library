@@ -5,7 +5,7 @@ function Book(title, author, pages, read){
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = () => {
+    this.info = function(){
         return `${title} by ${author}, ${pages} pages, ${read}`;
     }
 }
@@ -14,15 +14,21 @@ Book.prototype.readChange = function(){
     this.read = !this.read;
 }
 
-const book1 = new Book('Algorithms in C', 'Robert Sedgewick', 964, false);
-const book2 = new Book('Of Mice And Men', 'John Steinbeck', 107, true);
-const book3 = new Book('Pride And Prejudice', 'Jane Austen', 408, true);
-const book4 = new Book('The Great Gatsby', 'F. Scott Fitzgerald', 180, true);
+const saveToLocalStorage = () => {
+    localStorage.setItem('library', JSON.stringify(myLibrary));
+}
 
-myLibrary.push(book1);
-myLibrary.push(book2);
-myLibrary.push(book3);
-myLibrary.push(book4);
+const setLibrary = () => {
+    if (!localStorage.getItem('library')){
+        localStorage.setItem('library', JSON.stringify(myLibrary));
+    }
+}
+
+const updateLibrary = () => {
+    if (localStorage.getItem('library')){
+        localStorage.setItem('library', JSON.stringify(myLibrary));
+    }
+}
 
 const bookCount = (myLibrary) => {
     let count = 0;
@@ -58,7 +64,8 @@ const showBookForm = () => {
         formContainer.style.display = 'none';
         inputs.forEach(input => {
             input.style.borderColor = 'rgb(207, 217, 222);';
-            input.nextElementSibling = '';
+            input.nextElementSibling.value = '';
+            input.value = '';
         }
     )
     })
@@ -69,6 +76,16 @@ const displayBooks = () => {
     booksDisplay.textContent = '';
     const stats = document.querySelector('.book-stats').children;
     let key = 0;
+    let index = 0;
+    if (myLibrary.length === 0) setLibrary();
+    else updateLibrary();
+    const currentLibrary = JSON.parse(localStorage.getItem('library'));
+    currentLibrary.forEach(book => {
+        currentLibrary[index] = Object.assign(new Book(book.read = book.read), book);
+        index++;
+    })
+    myLibrary = currentLibrary;
+
     myLibrary.forEach(book => {
         const bookDiv = document.createElement('div');
         const bookHead = document.createElement('div');
@@ -123,9 +140,12 @@ const displayBooks = () => {
         booksDisplay.appendChild(bookDiv);
         key++;
     })
+    console.log(myLibrary);
     stats[0].textContent = `Total Books: ${bookCount(myLibrary)}`;
     stats[1].textContent = `Read Books: ${readCount(myLibrary)}`;
-    stats[2].textContent = `Unread Books ${unreadCount(myLibrary)}`;
+    stats[2].textContent = `Unread Books ${unreadCount(myLibrary)}`;    
+
+    
     deleteBook();
     toggleRead();
 }
@@ -170,6 +190,7 @@ const addBook = () => {
             myLibrary.push(newBook);
             inputs.forEach(input => input.value = "");
             formContainer.style.display = 'none';
+            saveToLocalStorage();
             displayBooks();
         }
 
@@ -185,6 +206,7 @@ const deleteBook = () => {
                 if (button.parentNode.parentNode.dataset.key === book.dataset.key){
                     myLibrary.splice(book.dataset.key, 1);
                 }
+                saveToLocalStorage();
                 displayBooks();
             })
         })
@@ -193,15 +215,10 @@ const deleteBook = () => {
 
 const toggleRead = () => {
     const readButtons = document.querySelectorAll('.read-button');
-    const books = document.querySelectorAll('.book-div');
     readButtons.forEach(button => {
         button.addEventListener('click', () =>{
-            books.forEach(book => {
-                if (button.parentNode.dataset.key === book.dataset.key){
-                    myLibrary[book.dataset.key].readChange();
-                }
-                displayBooks();
-            })
+            myLibrary[button.parentNode.dataset.key].readChange();
+            displayBooks();
         })
     })
 }
